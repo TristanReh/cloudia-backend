@@ -1,6 +1,6 @@
 import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
-import { AppService } from './app.service';
 import { User } from '@prisma/client';
+import { AppService } from 'src/services/app.service';
 
 @Controller() 
 export class AppController {
