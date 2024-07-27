@@ -1,5 +1,5 @@
 import { BadRequestException, Controller, Get, Post, Req, UnauthorizedException } from '@nestjs/common';
-import { LoginService } from 'src/services/login.service';
+import { LoginService } from '../services/login.service';
 
 @Controller('login')
 export class LoginController {
