@@ -16,11 +16,6 @@ export class LoginController {
       
         try {
             await this.loginService.checkCredentials(email, password);
-        } catch (err) {
-            throw err;
-        }
-
-        try {
             return await this.loginService.generateToken(email);
         } catch (err) {
             throw err;
