@@ -1,6 +1,8 @@
 import { Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { UserService } from './user.service';
-import * as jwt from "jsonwebtoken"
+import AuthenticationPayload from 'src/models/AuthenticationPayload';
+import { sign } from 'jsonwebtoken';
+
 @Injectable()
 export class LoginService {
     constructor(private readonly userService: UserService) {}
@@ -11,9 +13,9 @@ export class LoginService {
         else if (credentials.password != password) throw new UnauthorizedException("Password provided is wrong")
     }
 
-    generateToken(email: string) : { access_token: string } {
-        var token = jwt.sign({ email }, process.env.JWT_SECRET_KEY || null, { expiresIn: '1h'});
+    generateToken(email: string) : AuthenticationPayload {
+        var token = sign({ email }, process.env.JWT_SECRET_KEY || null, { expiresIn: '1h'});
         if (!token) throw new InternalServerErrorException("Token couldn't be generated");
-        return { access_token: token };
+        return { access_token: token, refresh_token: "" };
     }
 }
