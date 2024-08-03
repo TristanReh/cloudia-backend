@@ -13,8 +13,6 @@ import { AuthenticationMiddleware } from './middlewares/authentication.middlewar
 })
 export class CloudiaModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(AuthenticationMiddleware)
-      .forRoutes(FileController)
+    consumer.apply(AuthenticationMiddleware).forRoutes(FileController);
   }
 }

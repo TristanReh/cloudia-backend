@@ -15,11 +15,11 @@ export class UserService {
   }
 
   async getUserCredentials(
-    email : string
-  ): Promise<{email : string, password : string} | null> {
+    email: string,
+  ): Promise<{ email: string; password: string } | null> {
     return await this.prisma.user.findUnique({
-        select: { email : true, password : true},
-        where: { email }
+      select: { email: true, password: true },
+      where: { email },
     });
   }
 }
