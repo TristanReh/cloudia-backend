@@ -22,4 +22,19 @@ export class UserService {
       where: { email },
     });
   }
+
+  async doesUserExist(
+    email : string,
+  ): Promise<boolean> {
+    return await this.prisma.user.findUnique({
+      select: {email : true}, where: {email}
+    }) != null
+ 
+  }
+
+  async createUser (email: string, password: string) : Promise<void> {
+    await this.prisma.user.create({
+      data: {email, password}
+    })
+  }
 }

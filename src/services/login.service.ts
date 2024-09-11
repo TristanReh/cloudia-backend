@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
@@ -7,6 +8,7 @@ import {
 import { UserService } from './user.service';
 import AuthenticationPayload from 'src/models/AuthenticationPayload';
 import { sign } from 'jsonwebtoken';
+import { isValidEmail } from 'src/utils/email.util';
 
 @Injectable()
 export class LoginService {
@@ -26,5 +28,14 @@ export class LoginService {
     if (!token)
       throw new InternalServerErrorException("Token couldn't be generated");
     return { access_token: token, refresh_token: '' };
+  }
+
+  async checkEmail(email : string): Promise<void> {
+    if (!isValidEmail(email)) throw new BadRequestException('Email is not valid')
+    if(await this.userService.doesUserExist(email)) throw new BadRequestException('Email is already registered')
+  }
+  
+  async createUser(email: string, password : string): Promise<void>  {
+    this.userService.createUser(email,password)
   }
 }

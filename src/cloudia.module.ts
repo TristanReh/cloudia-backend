@@ -11,6 +11,7 @@ import { AuthenticationMiddleware } from './middlewares/authentication.middlewar
   controllers: [LoginController, FileController],
   providers: [PrismaService, UserService, LoginService],
 })
+
 export class CloudiaModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(AuthenticationMiddleware).forRoutes(FileController);
