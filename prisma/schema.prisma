@@ -27,8 +27,11 @@ model User {
 
 model File {
   id                  String @id @default(uuid())
+  filename            String 
   filesize            Int
   uploaddate          DateTime @default(now())
-  owner               User @relation(fields: [id], references: [email])
+  owner               User @relation(fields: [ownerId], references: [email])
+  ownerId             String 
   mimetype            String
+  buffer              Bytes
 }

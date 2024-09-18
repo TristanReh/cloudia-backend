@@ -5,11 +5,12 @@ import { LoginService } from './services/login.service';
 import { UserService } from './services/user.service';
 import { FileController } from './controllers/file.controller';
 import { AuthenticationMiddleware } from './middlewares/authentication.middleware';
+import { FileService } from './services/file.service';
 
 @Module({
   imports: [],
   controllers: [LoginController, FileController],
-  providers: [PrismaService, UserService, LoginService],
+  providers: [PrismaService, UserService, LoginService, FileService],
 })
 
 export class CloudiaModule implements NestModule {
